@@ -2,12 +2,11 @@
   "name": "gork-telegram-bot",
   "version": "1.0.0",
   "description": "Telegram bot for crypto trading signals and market monitoring",
-  "main": "standalone-bot.mjs",
+  "main": "src/standalone-bot.mjs",
   "type": "module",
   "scripts": {
-    "start": "node standalone-bot.mjs",
-    "dev": "node --watch standalone-bot.mjs",
-    "test": "node standalone-bot.mjs --test"
+    "start": "node src/standalone-bot.mjs",
+    "dev": "node --watch src/standalone-bot.mjs"
   },
   "keywords": [
     "telegram",
