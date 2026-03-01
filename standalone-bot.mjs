@@ -14,7 +14,7 @@ const require = createRequire(import.meta.url);
 const character = require('./characters/gork-telegram.character.json');
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || character.settings.secrets.TELEGRAM_BOT_TOKEN;
-const CHAT_ID = process.env.TELEGRAM_CHAT_ID || character.settings.TELEGRAM_CHAT_ID;
+const CHAT_ID = process.env.TELEGRAM_CHAT_ID || character.settings.TELEGRAM_CHAT_ID || "YOUR_CHAT_ID";
 const API = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
 // State - Use permanent location (not /tmp which gets wiped)
@@ -207,16 +207,24 @@ async function cmdRestart() {
 
 async function cmdReboot() {
   try {
-    // Reboot immediately
-
+    // Notify first (we won't be able to after reboot)
+    await tg('sendMessage', { 
+      chat_id: CHAT_ID, 
+      text: '🔄 Rebooting system now...\n\nBot will be back online in ~2 minutes.' 
+    });
+    
+    // Small delay to ensure message sends
+    await new Promise(r => setTimeout(r, 1000));
+    
+    // Reboot
     await execAsync('osascript -e \'tell app "System Events" to restart\'', {
       timeout: 5000
     });
-
+    
+    return null; // Already sent message
   } catch (e) {
     return `❌ Reboot failed: ${e.message}`;
   }
-
 }
 
 function cmdHelp() {
@@ -231,6 +239,7 @@ function cmdHelp() {
 /proof - Signal accuracy stats
 /status - System status
 /restart - Restart OpenClaw gateway
+/reboot - Reboot computer ⚠️
 /help - Show this message`;
 }
 
