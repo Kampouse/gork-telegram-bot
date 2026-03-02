@@ -2,6 +2,7 @@
 # Gork Monitors Control Script
 # Manage all monitoring services via launchd
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 COMMAND=${1:-status}
 
 SERVICES=(
@@ -17,15 +18,15 @@ SERVICES=(
 )
 
 LOGS=(
-    "/Users/asil/.openclaw/workspace/logs/standalone-bot.log"
-    "/Users/asil/.openclaw/workspace/logs/zec_breakdown.log"
-    "/Users/asil/.openclaw/workspace/logs/btc_reversal.log"
-    "/Users/asil/.openclaw/workspace/logs/near_reversal.log"
-    "/Users/asil/.openclaw/workspace/logs/ga_rsi.log"
-    "/Users/asil/.openclaw/workspace/logs/zec_ma_short.log"
-    "/Users/asil/.openclaw/workspace/logs/zscore.log"
-    "/Users/asil/.openclaw/workspace/logs/signal_validator.log"
-    "/Users/asil/.openclaw/workspace/logs/head_shoulders.log"
+    "$SCRIPT_DIR/logs/standalone-bot.log"
+    "$SCRIPT_DIR/logs/zec_breakdown.log"
+    "$SCRIPT_DIR/logs/btc_reversal.log"
+    "$SCRIPT_DIR/logs/near_reversal.log"
+    "$SCRIPT_DIR/logs/ga_rsi.log"
+    "$SCRIPT_DIR/logs/zec_ma_short.log"
+    "$SCRIPT_DIR/logs/zscore.log"
+    "$SCRIPT_DIR/logs/signal_validator.log"
+    "$SCRIPT_DIR/logs/head_shoulders.log"
 )
 
 status() {

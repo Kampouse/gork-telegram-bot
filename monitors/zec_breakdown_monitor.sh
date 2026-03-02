@@ -1,5 +1,6 @@
 #!/bin/bash
 # ZEC Breakdown Monitor - VALIDATED STRATEGY
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # Alerts on breakdown below 20-period support for SHORT entry
 #
 # Backtest results (regime-neutral 1000d):
@@ -8,7 +9,7 @@
 # - Hold: 24 hours
 # - Costs: 0.4% per trade included
 
-cd /Users/asil/.openclaw/workspace
+cd "$SCRIPT_DIR"
 source zscore-env/bin/activate
 
 # Fetch ZEC data and detect breakdown
@@ -17,7 +18,7 @@ import requests
 import pandas as pd
 import numpy as np
 import sys
-sys.path.insert(0, '/Users/asil/.openclaw/workspace/backtesting')
+sys.path.insert(0, '"$SCRIPT_DIR"')
 from regime_filter import check_regime
 from signal_validator_v2 import add_signal
 

@@ -1,9 +1,15 @@
 #!/bin/bash
 # Multi-symbol Z-Score monitor
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # Checks BTC, NEAR, ZEC and alerts on strong signals
 
-cd /Users/asil/.openclaw/workspace
-source zscore-env/bin/activate
+cd "$SCRIPT_DIR"
+
+# Use env var for venv path, or fallback to relative path
+ZSCORE_ENV="${ZSCORE_ENV:-$SCRIPT_DIR/../zscore-env}"
+if [ -d "$ZSCORE_ENV" ]; then
+  source "$ZSCORE_ENV/bin/activate"
+fi
 
 # Telegram bot token
 BOT_TOKEN="${TELEGRAM_BOT_TOKEN}"

@@ -1,14 +1,15 @@
 #!/bin/bash
 # Head & Shoulders Pattern Monitor
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # Detects both regular (bearish) and inverse (bullish) patterns
 # Scans BTC, NEAR, ZEC for confirmed patterns
 
-cd /Users/asil/.openclaw/workspace
+cd "$SCRIPT_DIR"
 source zscore-env/bin/activate
 
 python3 << 'EOF'
 import sys
-sys.path.insert(0, '/Users/asil/.openclaw/workspace/backtesting')
+sys.path.insert(0, '"$SCRIPT_DIR"')
 from head_shoulders_detector import fetch_candles, detect_head_shoulders, detect_inverse_head_shoulders
 
 SYMBOLS = ["BTCUSDT", "NEARUSDT", "ZECUSDT"]

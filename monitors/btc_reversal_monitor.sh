@@ -1,5 +1,6 @@
 #!/bin/bash
 # BTC Reversal LONG Monitor - VALIDATED STRATEGY
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # RSI Oversold Bounce: RSI was < 30, now recovering
 #
 # Backtest results (out-of-sample):
@@ -9,7 +10,7 @@
 # - Total PnL: +61.5% (17 trades)
 # - Hold: 72 hours
 
-cd /Users/asil/.openclaw/workspace
+cd "$SCRIPT_DIR"
 source zscore-env/bin/activate
 
 python3 << 'EOF'
@@ -17,7 +18,7 @@ import requests
 import pandas as pd
 import numpy as np
 import sys
-sys.path.insert(0, '/Users/asil/.openclaw/workspace/backtesting')
+sys.path.insert(0, '"$SCRIPT_DIR"')
 from signal_validator_v2 import add_signal
 
 def check_btc_reversal():

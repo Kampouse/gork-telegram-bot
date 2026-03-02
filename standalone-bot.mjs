@@ -4,9 +4,11 @@
  */
 
 import { createRequire } from 'module';
-import { writeFileSync, existsSync, readFileSync } from 'fs';
+import { writeFileSync, existsSync, readFileSync, mkdirSync } from 'fs';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 const execAsync = promisify(exec);
 
@@ -17,8 +19,12 @@ const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || character.settings.secrets.T
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID || character.settings.TELEGRAM_CHAT_ID ;
 const API = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
-// State - Use permanent location (not /tmp which gets wiped)
-const STATE_FILE = '/Users/asil/.openclaw/workspace/state/gork-bot-state.json';
+// Script directory for relative paths
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// State file (use env or relative path)
+const STATE_FILE = process.env.GORK_STATE_FILE || `${__dirname}/state/gork-bot-state.json`;
 let state = { lastUpdateId: 0 };
 
 function loadState() {
@@ -318,7 +324,7 @@ async function cmdPnL() {
 
 function cmdProof() {
   try {
-    const logFile = '/Users/asil/.openclaw/workspace/backtesting/signal_validation_log.json';
+    const logFile = process.env.SIGNAL_LOG || join(__dirname, 'monitors', 'signal_validation_log.json');
     
     if (!existsSync(logFile)) {
       return '📊 No signals logged yet.\n\nWaiting for first signal to trigger...';
@@ -414,8 +420,9 @@ async function cmdPositions() {
 
 async function cmdZscore(symbol = 'ZECUSDT') {
   try {
+    const zscoreScript = join(__dirname, 'plugins', 'zscore-command.sh');
     const { stdout, stderr } = await execAsync(
-      `/Users/asil/.openclaw/workspace/gork-agents/plugins/zscore-command.sh ${symbol}`,
+      `${zscoreScript} ${symbol}`,
       { timeout: 30000 }
     );
     

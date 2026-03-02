@@ -11,7 +11,7 @@ import requests
 from datetime import datetime, timedelta
 import os
 
-SIGNAL_LOG = "/Users/asil/.openclaw/workspace/backtesting/signal_validation_log.json"
+SIGNAL_LOG = os.path.join(os.path.dirname(__file__), "signal_validation_log.json")
 
 # Hold periods (hours)
 HOLD_PERIODS = {

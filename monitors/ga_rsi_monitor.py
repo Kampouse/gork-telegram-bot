@@ -241,12 +241,12 @@ def main():
         'checked': MONITOR,
     }
 
-    with open('/Users/asil/.openclaw/workspace/backtesting/ga_rsi_status.json', 'w') as f:
+    with open(os.path.join(os.path.dirname(__file__), 'ga_rsi_status.json'), 'w') as f:
         json.dump(status, f, indent=2)
 
     # Also log signals to validation log for tracking
     if signals:
-        log_file = '/Users/asil/.openclaw/workspace/backtesting/signal_validation_log.json'
+        log_file = os.path.join(os.path.dirname(__file__), 'signal_validation_log.json')
         try:
             with open(log_file, 'r') as f:
                 log_data = json.load(f)

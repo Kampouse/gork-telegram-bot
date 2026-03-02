@@ -1,5 +1,6 @@
 #!/bin/bash
 # ZEC MA5/20 SHORT Monitor - VALIDATED STRATEGY
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # Alerts on MA5 crossing below MA20 for SHORT entry
 #
 # Backtest results (regime-neutral 1000d):
@@ -8,7 +9,7 @@
 # - R/R: 7.77
 # - Hold: 72 hours
 
-cd /Users/asil/.openclaw/workspace
+cd "$SCRIPT_DIR"
 source zscore-env/bin/activate
 
 python3 << 'EOF'
@@ -16,7 +17,7 @@ import requests
 import pandas as pd
 import numpy as np
 import sys
-sys.path.insert(0, '/Users/asil/.openclaw/workspace/backtesting')
+sys.path.insert(0, '"$SCRIPT_DIR"')
 from regime_filter import check_regime
 from signal_validator_v2 import add_signal
 
