@@ -6,8 +6,8 @@ cd /Users/asil/.openclaw/workspace
 source zscore-env/bin/activate
 
 # Telegram bot token
-BOT_TOKEN="YOUR_BOT_TOKEN"
-CHAT_ID="YOUR_CHAT_ID"
+BOT_TOKEN="${TELEGRAM_BOT_TOKEN}"
+CHAT_ID="${TELEGRAM_CHAT_ID}"
 
 SYMBOLS="BTC NEAR ZEC"
 ALERT_STRENGTH=6  # Alert on strength >= 6
@@ -79,7 +79,7 @@ Reasons:
 
         # Send to Telegram
         curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -d chat_id="YOUR_CHAT_ID" \
+            -d chat_id="${TELEGRAM_CHAT_ID}" \
             -d text="$ALERT" \
             > /dev/null 2>&1
 

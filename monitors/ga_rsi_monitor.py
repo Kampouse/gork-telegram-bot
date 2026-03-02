@@ -56,8 +56,8 @@ GA_PARAMS = {
 MONITOR = ['BTC', 'NEAR', 'ZEC']
 
 # Telegram config
-BOT_TOKEN = "YOUR_BOT_TOKEN"
-CHAT_ID = "YOUR_CHAT_ID"
+BOT_TOKEN = "${TELEGRAM_BOT_TOKEN}"
+CHAT_ID = "${TELEGRAM_CHAT_ID}"
 
 # ============================================
 # FUNCTIONS
