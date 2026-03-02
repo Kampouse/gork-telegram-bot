@@ -14,7 +14,7 @@ const require = createRequire(import.meta.url);
 const character = require('./characters/gork-telegram.character.json');
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || character.settings.secrets.TELEGRAM_BOT_TOKEN;
-const CHAT_ID = process.env.TELEGRAM_CHAT_ID || character.settings.TELEGRAM_CHAT_ID || "YOUR_CHAT_ID";
+const CHAT_ID = process.env.TELEGRAM_CHAT_ID || character.settings.TELEGRAM_CHAT_ID ;
 const API = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
 // State - Use permanent location (not /tmp which gets wiped)

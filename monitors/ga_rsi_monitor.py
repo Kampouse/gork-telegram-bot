@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 """
 GA-Optimized RSI Signal Monitor
 Uses Feb 27, 2026 optimized parameters (100% WR for BTC/MSTR)
@@ -56,8 +57,8 @@ GA_PARAMS = {
 MONITOR = ['BTC', 'NEAR', 'ZEC']
 
 # Telegram config
-BOT_TOKEN = "${TELEGRAM_BOT_TOKEN}"
-CHAT_ID = "${TELEGRAM_CHAT_ID}"
+BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
 # ============================================
 # FUNCTIONS
